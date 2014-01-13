@@ -1,0 +1,46 @@
+[03/17/2012 12:57:55] [Separatist Liberation Droid {505440341327872}] [@Voodoo-two] [Blast Attack {2041312056442880}] [ApplyEffect {836045448945477}: Damage {836045448945501}] (46 energy {836045448940874}) <46>
+[03/17/2012 12:57:55] [@Voodoo-two] [@Voodoo-two] [Flurry of Bolts {947955116802048}] [Event {836045448945472}: AbilityActivate {836045448945479}] ()
+[03/17/2012 12:57:55] [@Voodoo-two] [@Voodoo-two] [] [Event {836045448945472}: ExitCombat {836045448945490}] ()
+[03/17/2012 12:57:55] [@Voodoo-two] [@Voodoo-two] [] [Event {836045448945472}: SetLevel {836045448945492}] (2)
+[03/17/2012 12:57:55] [@Voodoo-two] [Separatist Liberation Droid {505440341327872}] [Flurry of Bolts {947955116802048}] [ApplyEffect {836045448945477}: Damage {836045448945501}] (17 energy {836045448940874}) <17>
+[03/17/2012 12:57:56] [@Voodoo-two] [Separatist Liberation Droid {505440341327872}] [Flurry of Bolts {947955116802048}] [ApplyEffect {836045448945477}: Damage {836045448945501}] (22 energy {836045448940874}) <22>
+[03/17/2012 12:57:56] [@Voodoo-two] [Separatist Liberation Droid {505440341327872}] [] [Event {836045448945472}: Death {836045448945493}] ()
+[03/17/2012 12:57:56] [@Voodoo-two] [@Voodoo-two] [] [Event {836045448945472}: GainXp {836045448945491}] (107)
+[03/17/2012 12:58:15] [@Busur] [@Voodoo-two] [Fortification {1781488009871360}] [ApplyEffect {836045448945477}: Fortification {1781488009871360}] ()
+[03/17/2012 12:59:46] [@Voodoo-two] [@Voodoo-two] [Take Cover {807024354918400}] [ApplyEffect {836045448945477}: Cover {807024354918660}] ()
+[03/17/2012 12:59:46] [@Voodoo-two] [@Voodoo-two] [] [Event {836045448945472}: EnterCover {836045448945485}] ()
+[03/17/2012 12:59:48] [@Voodoo-two] [@Voodoo-two] [] [Event {836045448945472}: EnterCombat {836045448945489}] ()
+[03/17/2012 12:59:48] [@Voodoo-two] [@Voodoo-two] [Flurry of Bolts {947955116802048}] [Event {836045448945472}: AbilityActivate {836045448945479}] ()
+[03/17/2012 12:59:48] [@Voodoo-two] [Separatist Liberation Droid {505440341327872}] [Flurry of Bolts {947955116802048}] [ApplyEffect {836045448945477}: Damage {836045448945501}] (19 energy {836045448940874}) <19>
+[03/17/2012 12:59:48] [@Voodoo-two] [Separatist Liberation Droid {505440341327872}] [Flurry of Bolts {947955116802048}] [ApplyEffect {836045448945477}: Damage {836045448945501}] (0 -miss {836045448945502}) <1>
+[03/17/2012 12:59:48] [Separatist Liberation Droid {505440341327872}] [@Voodoo-two] [Blast Attack {2041312056442880}] [ApplyEffect {836045448945477}: Damage {836045448945501}] (42 energy {836045448940874}) <42>
+[03/17/2012 12:59:50] [@Voodoo-two] [@Voodoo-two] [Sabotage Charge {1695356735717376}] [Event {836045448945472}: AbilityActivate {836045448945479}] ()
+[03/17/2012 12:59:50] [@Voodoo-two] [@Voodoo-two] [] [Spend {836045448945473}: energy {836045448938503}] (20)
+[03/17/2012 12:59:50] [Separatist Liberation Droid {505440341327872}] [@Voodoo-two] [Ranged Attack {813496870633472}] [ApplyEffect {836045448945477}: Damage {836045448945501}] (0 -cover {836045448945510}) <1>
+[03/17/2012 12:59:50] [@Voodoo-two] [Separatist Liberation Droid {505440341327872}] [Sabotage Charge {1695356735717376}] [ApplyEffect {836045448945477}: Sabotage Charge (Tech) {1695356735717650}] ()
+[03/17/2012 12:59:51] [Separatist Liberation Droid {505440341327872}] [@Voodoo-two] [Ranged Attack {813496870633472}] [ApplyEffect {836045448945477}: Damage {836045448945501}] (0 -cover {836045448945510}) <1>
+[03/17/2012 12:59:53] [@Voodoo-two] [@Voodoo-two] [Flurry of Bolts {947955116802048}] [Event {836045448945472}: AbilityActivate {836045448945479}] ()
+[03/17/2012 12:59:53] [@Voodoo-two] [Separatist Liberation Droid {505440341327872}] [Sabotage Charge {1695356735717376}] [RemoveEffect {836045448945478}: Sabotage Charge (Tech) {1695356735717650}] ()
+[03/17/2012 12:59:53] [@Voodoo-two] [Separatist Liberation Droid {505440341327872}] [Sabotage Charge (Tech) {1695356735717650}] [ApplyEffect {836045448945477}: Damage {836045448945501}] (90 kinetic {836045448940873}) <90>
+[03/17/2012 12:59:53] [@Voodoo-two] [Separatist Liberation Droid {505440341327872}] [Flurry of Bolts {947955116802048}] [ApplyEffect {836045448945477}: Damage {836045448945501}] (24 energy {836045448940874}) <24>
+[03/17/2012 12:59:53] [@Voodoo-two] [Separatist Liberation Droid {505440341327872}] [Flurry of Bolts {947955116802048}] [ApplyEffect {836045448945477}: Damage {836045448945501}] (22 energy {836045448940874}) <22>
+[03/17/2012 12:59:53] [Separatist Liberation Droid {505440341327872}] [@Voodoo-two] [Ranged Attack {813496870633472}] [ApplyEffect {836045448945477}: Damage {836045448945501}] (14 energy {836045448940874}) <14>
+[03/17/2012 12:59:53] [Separatist Liberation Droid {505440341327872}] [@Voodoo-two] [Ranged Attack {813496870633472}] [ApplyEffect {836045448945477}: Damage {836045448945501}] (14 energy {836045448940874}) <14>
+[03/17/2012 12:59:55] [@Voodoo-two] [@Voodoo-two] [Flurry of Bolts {947955116802048}] [Event {836045448945472}: AbilityActivate {836045448945479}] ()
+[03/17/2012 12:59:55] [Separatist Liberation Droid {505440341327872}] [@Voodoo-two] [Blast Attack {2041312056442880}] [ApplyEffect {836045448945477}: Damage {836045448945501}] (0 -cover {836045448945510}) <1>
+[03/17/2012 12:59:55] [@Voodoo-two] [Separatist Liberation Droid {505440341327872}] [Flurry of Bolts {947955116802048}] [ApplyEffect {836045448945477}: Damage {836045448945501}] (19 energy {836045448940874}) <19>
+[03/17/2012 12:59:55] [@Voodoo-two] [Separatist Liberation Droid {505440341327872}] [Flurry of Bolts {947955116802048}] [ApplyEffect {836045448945477}: Damage {836045448945501}] (35* energy {836045448940874}) <35>
+[03/17/2012 12:59:56] [Separatist Liberation Droid {505440341327872}] [@Voodoo-two] [Ranged Attack {813496870633472}] [ApplyEffect {836045448945477}: Damage {836045448945501}] (9 energy {836045448940874}) <9>
+[03/17/2012 12:59:56] [Separatist Liberation Droid {505440341327872}] [@Voodoo-two] [Ranged Attack {813496870633472}] [ApplyEffect {836045448945477}: Damage {836045448945501}] (10 energy {836045448940874}) <10>
+[03/17/2012 12:59:57] [Separatist Liberation Droid {505440341327872}] [@Voodoo-two] [Ranged Attack {813496870633472}] [ApplyEffect {836045448945477}: Damage {836045448945501}] (0 -dodge {836045448945505}) <1>
+[03/17/2012 12:59:57] [@Voodoo-two] [@Voodoo-two] [Flurry of Bolts {947955116802048}] [Event {836045448945472}: AbilityActivate {836045448945479}] ()
+[03/17/2012 12:59:57] [@Voodoo-two] [Separatist Liberation Droid {505440341327872}] [Flurry of Bolts {947955116802048}] [ApplyEffect {836045448945477}: Damage {836045448945501}] (19 energy {836045448940874}) <19>
+[03/17/2012 12:59:57] [@Voodoo-two] [Separatist Liberation Droid {505440341327872}] [Flurry of Bolts {947955116802048}] [ApplyEffect {836045448945477}: Damage {836045448945501}] (29* energy {836045448940874}) <29>
+[03/17/2012 12:59:58] [Separatist Liberation Droid {505440341327872}] [@Voodoo-two] [Ranged Attack {813496870633472}] [ApplyEffect {836045448945477}: Damage {836045448945501}] (28 energy {836045448940874}) <28>
+[03/17/2012 12:59:59] [@Voodoo-two] [@Voodoo-two] [] [Event {836045448945472}: ExitCombat {836045448945490}] ()
+[03/17/2012 12:59:59] [@Voodoo-two] [@Voodoo-two] [Flurry of Bolts {947955116802048}] [Event {836045448945472}: AbilityActivate {836045448945479}] ()
+[03/17/2012 12:59:59] [@Voodoo-two] [Separatist Liberation Droid {505440341327872}] [Flurry of Bolts {947955116802048}] [ApplyEffect {836045448945477}: Damage {836045448945501}] (19 energy {836045448940874}) <19>
+[03/17/2012 12:59:59] [@Voodoo-two] [Separatist Liberation Droid {505440341327872}] [] [Event {836045448945472}: Death {836045448945493}] ()
+[03/17/2012 12:59:59] [@Voodoo-two] [@Voodoo-two] [] [Event {836045448945472}: GainXp {836045448945491}] (120)
+[03/17/2012 13:00:00] [@Voodoo-two] [@Voodoo-two] [] [Event {836045448945472}: LeaveCover {836045448945486}] ()
+[03/17/2012 13:00:00] [@Voodoo-two] [@Voodoo-two] [Take Cover {807024354918400}] [RemoveEffect {836045448945478}: Cover {807024354918660}] ()
