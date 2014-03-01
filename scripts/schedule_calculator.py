@@ -30,18 +30,26 @@ def printTable():
 			print(schedule[x][y]),
 		print " ---- Match " + str(y+1)
 
+def printTeam(team):
+	for y in range(numOfMatches):
+		for x in range(6):
+			if schedule[x][y] == team:
+				for z in range(6):
+					print(schedule[z][y]),
+				print ""
+
 
 def assignToSchedule():
 	position = 0
 
-	for y in range(numOfMatches):
-		for x in range(6):
-			if position == numOfTeams:
+	for x in range(6):
+		for y in range(numOfMatches):
+			schedule[x][y] = teams[position]
+			if position == (numOfTeams -1):
 				position = 0
 			else:
 				position += 1
-			print "Pushing"
-			schedule[x][y] = teams[position]
+			
 
 
 
@@ -54,3 +62,4 @@ def assignToSchedule():
 if __name__ == '__main__':
 		assignToSchedule()
 		printTable()
+		printTeam(1)
