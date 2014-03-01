@@ -17,11 +17,31 @@ schedule = [[0 for x in xrange(numOfMatches)] for x in xrange(6)]
 for x in range(numOfTeams):
 	teams.append(x+1)
 
+
+# ----------------------------------------------------------------------------------------
+# Function Name: printTable()
+# Parameters:    None
+# Returns:       None
+# Description:   Prints the full table of all matches
+# ----------------------------------------------------------------------------------------
 def printTable():
 	for y in range(numOfMatches):
 		for x in range(6):
 			print(schedule[x][y]),
 		print " ---- Match " + str(y+1)
+
+
+def assignToSchedule():
+	position = 0
+
+	for y in range(numOfMatches):
+		for x in range(6):
+			if position == numOfTeams:
+				position = 0
+			else:
+				position += 1
+			print "Pushing"
+			schedule[x][y] = teams[position]
 
 
 
@@ -32,4 +52,5 @@ def printTable():
 # Description:   This is the main method
 # ----------------------------------------------------------------------------------------
 if __name__ == '__main__':
+		assignToSchedule()
 		printTable()
