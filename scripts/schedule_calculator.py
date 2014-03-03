@@ -1,4 +1,11 @@
-# Quick utility to test speed of calculating a list
+#!/usr/bin/env python2.7
+
+# name:     schedule_calculator.py
+# author:   Chad Hobbs
+# created:  140228
+# last edit: 140302
+#
+# description: Quick utility to test speed of generating a list that minimizes sets with the same numbers.
 
 import time
 
@@ -30,6 +37,13 @@ def printTable():
 			print(schedule[x][y]),
 		print " ---- Match " + str(y+1)
 
+
+# ----------------------------------------------------------------------------------------
+# Function Name: printTeam()
+# Parameters:    None
+# Returns:       None
+# Description:   This function prints out a given team schedule
+# ----------------------------------------------------------------------------------------
 def printTeam(team):
 	for y in range(numOfMatches):
 		for x in range(6):
@@ -39,6 +53,12 @@ def printTeam(team):
 				print ""
 
 
+# ----------------------------------------------------------------------------------------
+# Function Name: assignToSchedule()
+# Parameters:    None
+# Returns:       None
+# Description:   This function puts all the numbers into the prebuilt array of sets
+# ----------------------------------------------------------------------------------------
 def assignToSchedule():
 	position = 0
 
@@ -50,7 +70,6 @@ def assignToSchedule():
 			else:
 				position += 1
 			
-
 
 
 # ----------------------------------------------------------------------------------------
