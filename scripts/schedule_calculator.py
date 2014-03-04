@@ -1,11 +1,13 @@
 #!/usr/bin/env python2.7
 
+# -----------------------------------------------------------------------------------------------------------
 # name:     schedule_calculator.py
 # author:   Chad Hobbs
 # created:  140228
 # last edit: 140302
 #
 # description: Quick utility to test speed of generating a list that minimizes sets with the same numbers.
+# -----------------------------------------------------------------------------------------------------------
 
 import time
 
