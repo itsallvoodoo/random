@@ -33,7 +33,6 @@ var config = {
     stripColors: false,
     // channelPrefixes: "&#",
     messageSplit: 512
-}
 };
 
 // Get the lib
@@ -53,6 +52,12 @@ bot.addListener("join", function(channel, who) {
 
 // Listen for any message, say to him/her in the room
 bot.addListener("message", function(from, to, text, message) {
+
 	bot.say(config.channels[0], "hola");
 });
 
+// Listen for kicks
+bot.addListener("kick", function(channel, who) {
+	// Welcome them in!
+	bot.say(channel, "GTFO " + who + "!!!");
+});
