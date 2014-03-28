@@ -18,7 +18,22 @@
 var config = {
 	channels: ["#nodebukket"],
 	server: "irc.freenode.net",
-	botName: "nodebukket"
+	botName: "nodebukket",
+    port: 6667,
+    debug: false,
+    showErrors: false,
+    autoRejoin: true,
+    autoConnect: true,
+    secure: false,
+    selfSigned: false,
+    certExpired: false,
+    floodProtection: false,
+    floodProtectionDelay: 1000,
+    sasl: false,
+    stripColors: false,
+    // channelPrefixes: "&#",
+    messageSplit: 512
+}
 };
 
 // Get the lib
