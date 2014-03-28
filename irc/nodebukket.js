@@ -38,10 +38,19 @@ var config = {
 // Get the lib
 var irc = require("irc");
 
+
+
+
 // Create the bot name
 var bot = new irc.Client(config.server, config.botName, { 
 	channels: config.channels
 });
+
+// Error handling
+bot.addListener('error', function(message) {
+	console.log('error: ', message);
+});
+
 
 // Listen for joins
 bot.addListener("join", function(channel, who) {
@@ -66,14 +75,15 @@ bot.addListener("kick", function(channel, who, by, reason, message) {
 // Listen for any message, say to him/her in the room
 bot.addListener("message", function(from, to, text, message) {
 
-	bot.say(config.channels[0], "The following is what was recieved.");
-	bot.say(config.channels[0], message.prefix);
-	bot.say(config.channels[0], message.nick);
-	bot.say(config.channels[0], message.user);
-	bot.say(config.channels[0], message.host);
-	bot.say(config.channels[0], message.server);
-	bot.say(config.channels[0], message.rawCommand);
-	bot.say(config.channels[0], message.command);
-	bot.say(config.channels[0], message.commandType);
-	bot.say(config.channels[0], message.args);
+	if (text == "message") {
+		bot.say(config.channels[0], "The following is what was recieved.");
+		bot.say(config.channels[0], "prefix: " + message.prefix);
+		bot.say(config.channels[0], "nick: " + message.nick);
+		bot.say(config.channels[0], "user: " + message.user);
+		bot.say(config.channels[0], "host: " + message.host);
+		bot.say(config.channels[0], "server: " + message.server);
+		bot.say(config.channels[0], "rawCommand: " + message.rawCommand);
+		bot.say(config.channels[0], "command: " + message.command);
+		bot.say(config.channels[0], "commandType: " + message.commandType);
+	}
 });
