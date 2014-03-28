@@ -11,30 +11,15 @@
 *  ----------------------------------------------------------------------------------------
 */
 
-// Configuration Object
-var config = {
-	channels: ["#cscofc","#nodebukket"],
-	server: "irc.freenode.net",
-	botName: "nodebukket",
-    port: 6667,
-    debug: false,
-    showErrors: false,
-    autoRejoin: true,
-    autoConnect: true,
-    secure: false,
-    selfSigned: false,
-    certExpired: false,
-    floodProtection: false,
-    floodProtectionDelay: 1000,
-    sasl: false,
-    stripColors: false,
-    // channelPrefixes: "&#",
-    messageSplit: 512
-};
-
-// Libraries
+// Dependencies
 var irc = require("irc");
 
+// The config library is used to pull in custom irc server config files and specific modules for this bot
+var modConfig = require("./scripts/config")
+var config = modConfig.config;
+
+
+//var req = require("require")
 
 
 /* ----------------------------------------------------------------------------------------
@@ -81,7 +66,9 @@ bot.addListener("message", function(from, to, text, message) {
 		bot.say(config.channels[0], "command: " + message.command);
 		bot.say(config.channels[0], "commandType: " + message.commandType);
 	}
+
 	
+
 });
 
 // KICKS
