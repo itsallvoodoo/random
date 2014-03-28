@@ -66,5 +66,14 @@ bot.addListener("kick", function(channel, who, by, reason, message) {
 // Listen for any message, say to him/her in the room
 bot.addListener("message", function(from, to, text, message) {
 
-	bot.say(config.channels[0], "hola");
+	bot.say(config.channels[0], "The following is what was recieved.");
+	bot.say(config.channels[0], message.prefix);
+	bot.say(config.channels[0], message.nick);
+	bot.say(config.channels[0], message.user);
+	bot.say(config.channels[0], message.host);
+	bot.say(config.channels[0], message.server);
+	bot.say(config.channels[0], message.rawCommand);
+	bot.say(config.channels[0], message.command);
+	bot.say(config.channels[0], message.commandType);
+	bot.say(config.channels[0], message.args);
 });
