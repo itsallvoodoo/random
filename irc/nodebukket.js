@@ -7,10 +7,7 @@
 */
 
 /* ----------------------------------------------------------------------------------------
-* Module Name: mainApp
-* Parameters:    TBD
-* Returns:       TBD
-* Description:   This is the main module
+* Configurations and libraries
 *  ----------------------------------------------------------------------------------------
 */
 
@@ -35,47 +32,56 @@ var config = {
     messageSplit: 512
 };
 
-// Get the lib
+// Libraries
 var irc = require("irc");
 
 
 
-
+/* ----------------------------------------------------------------------------------------
+* Object
+*  ----------------------------------------------------------------------------------------
+*/
 // Create the bot name
 var bot = new irc.Client(config.server, config.botName, { 
 	channels: config.channels
 });
 
+
+/* ----------------------------------------------------------------------------------------
+* Handlers
+*  ----------------------------------------------------------------------------------------
+*/
 // Error handling
 bot.addListener('error', function(message) {
 	console.log('error: ', message);
 });
 
 
-// Listen for joins
+// JOINS
 bot.addListener("join", function(channel, who) {
 	// Welcome them in!
 	bot.say(channel, who + "...dude...welcome back!");
 });
 
 
-// Listen for any message, say to him/her in the room
+// TEST MESSAGE RESPONSE
 bot.addListener("message", function(from, to, text, message) {
-
-	bot.say(config.channels[0], "hola");
+	if (text == "test") {
+		bot.say(config.channels[0], "This is a test");
+	}
 });
 
-// Listen for kicks
+// KICKS
 bot.addListener("kick", function(channel, who, by, reason, message) {
 	// Send them on their way
 	bot.say(channel, "GTFO " + who + "!!!");
 	bot.say(channel, reason + " is a shitty way to go...");
 });
 
-// Listen for any message, say to him/her in the room
+// This displays all message arguments, just to test
 bot.addListener("message", function(from, to, text, message) {
 
-	if (text == "message") {
+	if (text == "message arguments") {
 		bot.say(config.channels[0], "The following is what was recieved.");
 		bot.say(config.channels[0], "prefix: " + message.prefix);
 		bot.say(config.channels[0], "nick: " + message.nick);
