@@ -13,7 +13,7 @@
 
 // Configuration Object
 var config = {
-	channels: ["#nodebukket"],
+	channels: ["#cscofc","#nodebukket"],
 	server: "irc.freenode.net",
 	botName: "nodebukket",
     port: 6667,
@@ -69,17 +69,6 @@ bot.addListener("message", function(from, to, text, message) {
 	if (text == "test") {
 		bot.say(config.channels[0], "This is a test");
 	}
-});
-
-// KICKS
-bot.addListener("kick", function(channel, who, by, reason, message) {
-	// Send them on their way
-	bot.say(channel, "GTFO " + who + "!!!");
-	bot.say(channel, reason + " is a shitty way to go...");
-});
-
-// This displays all message arguments, just to test
-bot.addListener("message", function(from, to, text, message) {
 
 	if (text == "message arguments") {
 		bot.say(config.channels[0], "The following is what was recieved.");
@@ -92,4 +81,18 @@ bot.addListener("message", function(from, to, text, message) {
 		bot.say(config.channels[0], "command: " + message.command);
 		bot.say(config.channels[0], "commandType: " + message.commandType);
 	}
+	
+});
+
+// KICKS
+bot.addListener("kick", function(channel, who, by, reason, message) {
+	// Send them on their way
+	bot.say(channel, "GTFO " + who + "!!!");
+	bot.say(channel, reason + " is a shitty way to go...");
+});
+
+// This displays all message arguments, just to test
+bot.addListener("message", function(from, to, text, message) {
+
+	
 });
