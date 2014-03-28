@@ -8,9 +8,9 @@
 
 // Configuration Object
 var config = {
-	channels: ["#nodebukket"],
-	server: "irc.freenode.net",
-	botName: "nodebukket",
+	channels: ["#yourchannel"],
+	server: "irc.yournetwork.net",
+	botName: "yournodebukket",
     port: 6667,
     debug: false,
     showErrors: false,

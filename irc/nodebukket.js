@@ -13,9 +13,17 @@
 
 // Dependencies
 var irc = require("irc");
+var mysql = require("mysql")
+
+var mysqlConfig = require("./scripts/voodooMysqlConfig")
+var conn = mysql.createConnection({
+	host : mysqlConfig.config.host,
+	user : mysqlConfig.config.user,
+	password : mysqlConfig.config.password
+})
 
 // The config library is used to pull in custom irc server config files and specific modules for this bot
-var modConfig = require("./scripts/config")
+var modConfig = require("./scripts/voodooConfig")
 var config = modConfig.config;
 
 
@@ -68,6 +76,25 @@ try {
 			bot.say(config.channels[0], "command: " + message.command);
 			bot.say(config.channels[0], "commandType: " + message.commandType);
 		}
+
+		if (text == "connect") {
+			conn.connect();
+			conn.query("use bucket");
+			var strQuery = "SELECT fact from bucket_facts ORDER BY id DESC LIMIT 1";
+			conn.query(strQuery, function(err, row) {
+				if(err) {
+					throw err;
+				}
+				else {
+					console.log(row);
+					bot.say(config.channels[0], "Last fact: " + row[0].fact);
+				}
+			});
+			conn.end(function(err){
+				conn.destroy();
+			});
+			
+		};
 
 		
 
