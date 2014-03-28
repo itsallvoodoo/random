@@ -57,7 +57,14 @@ bot.addListener("message", function(from, to, text, message) {
 });
 
 // Listen for kicks
-bot.addListener("kick", function(channel, who) {
-	// Welcome them in!
+bot.addListener("kick", function(channel, who, by, reason, message) {
+	// Send them on their way
 	bot.say(channel, "GTFO " + who + "!!!");
+	bot.say(channel, reason + " is a shitty way to go...");
+});
+
+// Listen for any message, say to him/her in the room
+bot.addListener("message", function(from, to, text, message) {
+
+	bot.say(config.channels[0], "hola");
 });
