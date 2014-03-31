@@ -46,9 +46,10 @@ var bot = new irc.Client(config.server, config.botName, {
 function dbQuery(operation, data, table, args) {
 	var qList = [operation,data,"from",table,args];
 	var queryStr = qList.join(" ");
-	conn.connect();
+	//conn.connect();
 	conn.query("use bucket");
 	try {
+		/*
 		conn.query(queryStr, function(err, rows) {
 				if(err) {
 					throw err;
@@ -60,6 +61,17 @@ function dbQuery(operation, data, table, args) {
 					return String(one[data]);
 				}
 		});
+		*/
+		conn.query(queryStr, function(err, result, fields) {
+    		if (err) throw err;
+    		else {
+        		for (var i in result) {
+            		var gadget = result[i];
+            		console.log(gadget[data]);
+            		return String(gadget[data]);
+        	}
+    	}
+});
 		conn.end(function(err){
 			// Any ending after conn close
 		});
@@ -112,7 +124,7 @@ try {
 			case 'connect':
 				try {
 					var item = dbQuery("SELECT", "fact", "bucket_facts", "ORDER BY id DESC LIMIT 1");
-					bot.say(config.channels[0], "Last fact: " + item);
+					bot.say(config.channels[0], item);
 				}
 				catch(err) {
 					console.log(err.message)
