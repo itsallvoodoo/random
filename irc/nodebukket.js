@@ -43,10 +43,8 @@ var bot = new irc.Client(config.server, config.botName, {
 * Functions
 *  ----------------------------------------------------------------------------------------
 */
-function dbQuery(operation, data, table, args) {
-	var qList = [operation,data,"from",table,args];
-	var queryStr = qList.join(" ");
-	var gadget;
+function dbQuery(operation, data, table, args, callback) {
+	var queryStr = [operation,data,"from",table,args].join(" ");
 	//conn.connect();
 	conn.query("use bucket");
 	try {
@@ -66,20 +64,20 @@ function dbQuery(operation, data, table, args) {
 		conn.query(queryStr, function(err, result, fields) {
     		if (err) throw err;
     		else {
-        		for (var i in result) {
-            		gadget = result[i];
-            		var returned = String(gadget[data]);
-            		console.log("In dbQuery" + returned);
-            		return JSON.stringify(returned);
-        		}
-    		}
-		});
-
-	}
+    			console.log("Success in dbQuery: " + result);
+        		returnValue = result[0];
+        	}
+    	});
+    	callback(returnValue);
+    }
 	catch(err) {
-		console.log("dbQuery catch: ",err);
+		console.log("Fail in dbQuery, catch: " + err);
 	}	
-}
+};
+
+function printToChannel(channel, printString) {
+	bot.say(channel, printString);
+};
 
 
 /* ----------------------------------------------------------------------------------------
@@ -105,33 +103,30 @@ try {
 	bot.addListener("message", function(from, to, text, message) {
 		switch(text) {
 			case 'test':
-				bot.say(config.channels[0], "This is a test");
+				printToChannel(config.channels[0], "This is a test");
+				printToChannel(config.channels[0], "2 lines");
 				break;
 
 
 			case 'message arguments':
-				bot.say(config.channels[0], "The following is what was recieved.");
-				bot.say(config.channels[0], "prefix: " + message.prefix);
-				bot.say(config.channels[0], "nick: " + message.nick);
-				bot.say(config.channels[0], "user: " + message.user);
-				bot.say(config.channels[0], "host: " + message.host);
-				bot.say(config.channels[0], "server: " + message.server);
-				bot.say(config.channels[0], "rawCommand: " + message.rawCommand);
-				bot.say(config.channels[0], "command: " + message.command);
-				bot.say(config.channels[0], "commandType: " + message.commandType);
+				printToChannel(config.channels[0], "The following is what was recieved.");
+				printToChannel(config.channels[0], "prefix: " + message.prefix);
+				printToChannel(config.channels[0], "nick: " + message.nick);
+				printToChannel(config.channels[0], "user: " + message.user);
+				printToChannel(config.channels[0], "host: " + message.host);
+				printToChannel(config.channels[0], "server: " + message.server);
+				printToChannel(config.channels[0], "rawCommand: " + message.rawCommand);
+				printToChannel(config.channels[0], "command: " + message.command);
+				printToChannel(config.channels[0], "commandType: " + message.commandType);
 				break;
 
 			case 'connect':
 				try {
-					var item = dbQuery("SELECT", "fact", "bucket_facts", "ORDER BY id DESC LIMIT 1");
-					console.log("Back in connect");
-					console.log(item);
-					bot.say(config.channels[0], "Got something");
-					bot.say(config.channels[0], item);
+					dbQuery("SELECT", "fact", "bucket_facts", "ORDER BY id DESC LIMIT 1", printToChannel);
 				}
 				catch(err) {
-					console.log(err.message)
-					bot.say(config.channels[0], "That didn't work...");
+					console.log("Fail in connect: " + err.message)
+					printToChannel(config.channels[0], "That didn't work...");
 				}
 				break;
 		}
@@ -141,8 +136,8 @@ try {
 	// KICKS
 	bot.addListener("kick", function(channel, who, by, reason, message) {
 		// Send them on their way
-		bot.say(channel, "GTFO " + who + "!!!");
-		bot.say(channel, reason + " is a shitty way to go...");
+		printToChannel(channel, "GTFO " + who + "!!!");
+		printToChannel(channel, reason + " is a shitty way to go...");
 	});
 
 }
