@@ -45,38 +45,38 @@ var bot = new irc.Client(config.server, config.botName, {
 */
 function dbQuery(operation, data, table, args, callback) {
 	var queryStr = [operation,data,"from",table,args].join(" ");
+	var returnValue;
 	//conn.connect();
 	conn.query("use bucket");
 	try {
-		/*
-		conn.query(queryStr, function(err, rows) {
-				if(err) {
-					throw err;
-				}
-				else {
-					var row = Math.floor(Math.random()*(rows.length));
-					var one = rows[row];
-					console.log("Inside dbQuery: ",one[data]);
-					return String(one[data]);
-				}
-		});
-		*/
+
 		conn.query(queryStr, function(err, result, fields) {
     		if (err) throw err;
     		else {
-    			console.log("Success in dbQuery: " + result);
-        		returnValue = result[0];
+    			console.log("Success in dbQuery: " + result[0][data]);
+        		returnValue = result[0][data];
+        		callback(returnValue);
         	}
     	});
-    	callback(returnValue);
+    	//callback(returnValue);
     }
 	catch(err) {
 		console.log("Fail in dbQuery, catch: " + err);
 	}	
 };
 
-function printToChannel(channel, printString) {
-	bot.say(channel, printString);
+function printToChannel(printString, channel) {
+	try {
+			if(!channel) {
+			bot.say(config.channels[0], printString);
+		} else{
+			bot.say(channel, printString);
+		}
+	}
+	catch(err) {
+		console.log("Fail in printToChannel, catch: " + err);
+
+	}
 };
 
 
@@ -103,21 +103,26 @@ try {
 	bot.addListener("message", function(from, to, text, message) {
 		switch(text) {
 			case 'test':
-				printToChannel(config.channels[0], "This is a test");
-				printToChannel(config.channels[0], "2 lines");
+				printToChannel("This is a test");
+				printToChannel("2 lines");
+				break;
+
+			case 'test2':
+				printToChannel("This is a test", config.channels[0]);
+				printToChannel("2 lines", config.channels[0]);
 				break;
 
 
 			case 'message arguments':
-				printToChannel(config.channels[0], "The following is what was recieved.");
-				printToChannel(config.channels[0], "prefix: " + message.prefix);
-				printToChannel(config.channels[0], "nick: " + message.nick);
-				printToChannel(config.channels[0], "user: " + message.user);
-				printToChannel(config.channels[0], "host: " + message.host);
-				printToChannel(config.channels[0], "server: " + message.server);
-				printToChannel(config.channels[0], "rawCommand: " + message.rawCommand);
-				printToChannel(config.channels[0], "command: " + message.command);
-				printToChannel(config.channels[0], "commandType: " + message.commandType);
+				printToChannel("The following is what was recieved.");
+				printToChannel("prefix: " + message.prefix);
+				printToChannel("nick: " + message.nick);
+				printToChannel("user: " + message.user);
+				printToChannel("host: " + message.host);
+				printToChannel("server: " + message.server);
+				printToChannel("rawCommand: " + message.rawCommand);
+				printToChannel("command: " + message.command);
+				printToChannel("commandType: " + message.commandType);
 				break;
 
 			case 'connect':
@@ -126,7 +131,7 @@ try {
 				}
 				catch(err) {
 					console.log("Fail in connect: " + err.message)
-					printToChannel(config.channels[0], "That didn't work...");
+					printToChannel("That didn't work...");
 				}
 				break;
 		}
@@ -136,8 +141,8 @@ try {
 	// KICKS
 	bot.addListener("kick", function(channel, who, by, reason, message) {
 		// Send them on their way
-		printToChannel(channel, "GTFO " + who + "!!!");
-		printToChannel(channel, reason + " is a shitty way to go...");
+		printToChannel("GTFO " + who + "!!!");
+		printToChannel(reason + " is a shitty way to go...");
 	});
 
 }
