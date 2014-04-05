@@ -1,13 +1,14 @@
 /*
 * name:     nodebukket.js
 * author:   Chad Hobbs
+* contributors: None
 * created:  140327
 *
 * description: This is the glory and wonder that is node bukket
 */
 
 /* ----------------------------------------------------------------------------------------
-* Configurations and libraries
+* 									Configurations and Libraries
 *  ----------------------------------------------------------------------------------------
 */
 
@@ -26,12 +27,12 @@ var conn = mysql.createConnection({
 var modConfig = require("./scripts/voodooConfig")
 var config = modConfig.config;
 
-
+// TODO I believe I need require in order to implement dynamic script loading
 //var req = require("require")
 
 
 /* ----------------------------------------------------------------------------------------
-* Object
+* 										Global Objects
 *  ----------------------------------------------------------------------------------------
 */
 // Create the bot name
@@ -40,11 +41,21 @@ var bot = new irc.Client(config.server, config.botName, {
 });
 
 /* ----------------------------------------------------------------------------------------
-* Functions
+* 										Functions
 *  ----------------------------------------------------------------------------------------
 */
 
-// This function 
+/* ----------------------------------------------------------------------------------------
+* Function Name: dbQuery
+* Parameters:    operation: the mysql INSERT or SELECT
+* Parameters:    data: the column name of the item being looked for
+* Parameters:    table: which table to use
+* Parameters:    args: sorts, wheres, limits, and any other query arguments
+* Parameters:    callback, where to return the query results
+* Returns:       None
+* Description:   This function is used to access the bot database and perform inserts or selects
+*  ----------------------------------------------------------------------------------------
+*/ 
 function dbQuery(operation, data, table, args, callback) {
 	var queryStr = [operation,data,"from",table,args].join(" ");
 	conn.query("use bucket");
@@ -76,8 +87,14 @@ function dbQuery(operation, data, table, args, callback) {
 		
 };
 
-
-// This function prints a given to string to the supplied channel, else provides a default channel
+/* ----------------------------------------------------------------------------------------
+* Function Name: printToChannel
+* Parameters:    printString: The string that needs to be sent to the irc channel
+* Parameters:    channel: The specific channel to send it to, or default to the control channel
+* Returns:       None
+* Description:   This function prints a given to string to the supplied channel, else provides a default channel
+*  ----------------------------------------------------------------------------------------
+*/ 
 function printToChannel(printString, channel) {
 	try {
 			if(!channel) {
@@ -92,12 +109,26 @@ function printToChannel(printString, channel) {
 	}
 };
 
-
 /* ----------------------------------------------------------------------------------------
-* Handlers
+* Function Name: prepareInsert
+* Parameters:    text: The string that needs to be prepared
+* Returns:       TBD
+* Description:   This function prepares the INSERT argument to be passed to dbQuery
 *  ----------------------------------------------------------------------------------------
 */
+function prepareInsert(text) {
 
+}
+
+
+
+/* ----------------------------------------------------------------------------------------
+* Function Name: 
+* Parameters:    None
+* Returns:       None
+* Description:   This is the main module
+*  ----------------------------------------------------------------------------------------
+*/
 try {
 	// Error handling
 	bot.addListener('error', function(message) {
@@ -108,7 +139,7 @@ try {
 	// JOINS
 	bot.addListener("join", function(channel, who) {
 		// Welcome them in!
-		bot.say(channel, who + "...dude...welcome back!");
+		printToChannel(who + "...dude...welcome back!", channel);
 	});
 
 
@@ -117,10 +148,22 @@ try {
 
 		if (text.length > 5) {
 			try {
-					var args = "WHERE fact=" + '"' + text + '"' + " ORDER BY RAND () LIMIT 0,1";
-					console.log(args);
-					dbQuery("SELECT", "tidbit", "bucket_facts", args, printToChannel);
-			} // SELECT * FROM `table` ORDER BY RAND() LIMIT 0,1;
+					// Database INSERT detection
+					// If the beginning of the text is the bot's name, then start insert sequence
+					if (text.substr(0,config.botName.length) == config.botName) {
+						//prepareInsert(text);
+						printToChannel("Go ahead with inserting");
+					
+					} else {
+						
+						// Standard trigger lookup
+						// TODO This string needs SQL inject protection
+						var args = "WHERE fact=" + '"' + text + '"' + " ORDER BY RAND () LIMIT 0,1";
+						dbQuery("SELECT", "tidbit", "bucket_facts", args, printToChannel);
+					}
+
+
+			}
 			catch(err) {
 				console.log("Fail in connect: " + err.message)
 				printToChannel("That didn't work...");
@@ -130,17 +173,6 @@ try {
 			/*
 		}
 		switch(text) {
-			case 'test':
-				printToChannel("This is a test");
-				printToChannel("2 lines");
-				break;
-
-			case 'test2':
-				printToChannel("This is a test", config.channels[0]);
-				printToChannel("2 lines", config.channels[0]);
-				break;
-
-
 			case 'message arguments':
 				printToChannel("The following is what was recieved.");
 				printToChannel("prefix: " + message.prefix);
@@ -151,10 +183,6 @@ try {
 				printToChannel("rawCommand: " + message.rawCommand);
 				printToChannel("command: " + message.command);
 				printToChannel("commandType: " + message.commandType);
-				break;
-
-			case 'connect':
-				
 				break;
 		} */
 
