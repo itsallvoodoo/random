@@ -117,7 +117,7 @@ function printToChannel(printString, channel) {
 *  ----------------------------------------------------------------------------------------
 */
 function prepareInsert(text) {
-
+	//TODO Build this out
 }
 
 
