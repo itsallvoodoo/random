@@ -8,7 +8,8 @@
 
 // Configuration Object
 var config = {
-	channels: ["#yourchannel"],
+    // For Channels, first must be command/control, second+ is public
+	channels: ["#yourControlChannel","#yourPublicChannel"],
 	server: "irc.yournetwork.net",
 	botName: "yournodebukket",
     port: 6667,

@@ -43,28 +43,41 @@ var bot = new irc.Client(config.server, config.botName, {
 * Functions
 *  ----------------------------------------------------------------------------------------
 */
+
+// This function 
 function dbQuery(operation, data, table, args, callback) {
 	var queryStr = [operation,data,"from",table,args].join(" ");
-	var returnValue;
-	//conn.connect();
 	conn.query("use bucket");
-	try {
 
-		conn.query(queryStr, function(err, result, fields) {
-    		if (err) throw err;
-    		else {
-    			console.log("Success in dbQuery: " + result[0][data]);
-        		returnValue = result[0][data];
-        		callback(returnValue);
-        	}
-    	});
-    	//callback(returnValue);
-    }
-	catch(err) {
-		console.log("Fail in dbQuery, catch: " + err);
-	}	
+	switch(operation) {
+		case 'INSERT':
+			// TODO Not implemented yet
+			break;
+
+		case 'SELECT':
+			try {
+
+				conn.query(queryStr, function(err, result, fields) {
+		    		if (err) throw err;
+		    		else {
+		    			console.log("Success in dbQuery: " + result[0][data]); // TODO delete, for testing only
+		        		callback(result[0][data]);
+		        	}
+		    	});
+		    }
+			catch(err) {
+				console.log("Fail in dbQuery, catch: " + err);
+			}
+			break;
+
+		default:
+			break;
+	}
+		
 };
 
+
+// This function prints a given to string to the supplied channel, else provides a default channel
 function printToChannel(printString, channel) {
 	try {
 			if(!channel) {
@@ -101,6 +114,21 @@ try {
 
 	// TEST MESSAGE RESPONSE
 	bot.addListener("message", function(from, to, text, message) {
+
+		if (text.length > 5) {
+			try {
+					var args = "WHERE fact=" + '"' + text + '"' + " ORDER BY RAND () LIMIT 0,1";
+					console.log(args);
+					dbQuery("SELECT", "tidbit", "bucket_facts", args, printToChannel);
+			} // SELECT * FROM `table` ORDER BY RAND() LIMIT 0,1;
+			catch(err) {
+				console.log("Fail in connect: " + err.message)
+				printToChannel("That didn't work...");
+			}
+		}
+
+			/*
+		}
 		switch(text) {
 			case 'test':
 				printToChannel("This is a test");
@@ -126,15 +154,9 @@ try {
 				break;
 
 			case 'connect':
-				try {
-					dbQuery("SELECT", "fact", "bucket_facts", "ORDER BY id DESC LIMIT 1", printToChannel);
-				}
-				catch(err) {
-					console.log("Fail in connect: " + err.message)
-					printToChannel("That didn't work...");
-				}
+				
 				break;
-		}
+		} */
 
 	});
 
