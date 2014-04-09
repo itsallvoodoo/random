@@ -101,6 +101,47 @@ db.on("connect", function(err) {
 			
 	};
 
+
+	/* ----------------------------------------------------------------------------------------
+	* Function Name: dbCommand
+	* Parameters:    text: String to be analyzed to determine what command is being issued
+	* Parameters:    callback, where to return the Command results
+	* Returns:       NA
+	* Description:   This function prepares the INSERT argument to be passed to dbQuery
+	*  ----------------------------------------------------------------------------------------
+	*/
+	function dbCommand(text,callback) {
+			//var validUrl = /^(http|https):\/\/[^ "]+$/;
+			var reply = /[^]( <reply> )[^]/i;
+			var action = /[^]( <action> )[^]/i;
+			var are = /[^]( are )[^]/i;
+			var is = /[^]( is )[^]/i;
+			var loves = /[^]( loves )[^]/i;
+			var strangles = /[^]( strangles )[^]/i;
+			var returned;
+			if (reply.test(text)) {
+				returned = "Reply pattern found"
+			} else if (action.test(text)) {
+				returned = "Action pattern found"
+			} else if (are.test(text)) {
+				returned = "Are pattern found"
+			} else if (is.test(text)) {
+				returned = "Is pattern found"
+			} else if (loves.test(text)) {
+				returned = "Love pattern found"
+			} else if (strangles.test(text)) {
+				returned = "Strangles pattern found"
+			} else {
+				returned = "Command not understood";
+			}
+
+
+		callback(returned); // TODO Temp filler until function completed
+	}
+
+
+
+
 	/* ----------------------------------------------------------------------------------------
 	* Function Name: printToChannel
 	* Parameters:    printString: The string that needs to be sent to the irc channel
@@ -123,25 +164,12 @@ db.on("connect", function(err) {
 		}
 	};
 
-	/* ----------------------------------------------------------------------------------------
-	* Function Name: dbCommand
-	* Parameters:    text: String to be analyzed to determine what command is being issued
-	* Parameters:    callback, where to return the Command results
-	* Returns:       NA
-	* Description:   This function prepares the INSERT argument to be passed to dbQuery
-	*  ----------------------------------------------------------------------------------------
-	*/
-	function dbCommand(text,callback) {
-		callback("Go ahead with inserting");
-	}
-
-
 
 	/* ----------------------------------------------------------------------------------------
-	* Function Name: 
+	* Function Name: Main listener loop
 	* Parameters:    None
 	* Returns:       None
-	* Description:   This is the main module
+	* Description:   This is all the channel listeners, and commits actions based on the messages
 	*  ----------------------------------------------------------------------------------------
 	*/
 	try {
@@ -149,7 +177,6 @@ db.on("connect", function(err) {
 		bot.addListener('error', function(message) {
 			throw message;
 		});
-
 
 		// JOINS
 		bot.addListener("join", function(channel, who) {
@@ -163,17 +190,15 @@ db.on("connect", function(err) {
 
 			if (text.length > 5) {
 				try {
-						// Database INSERT detection
-						// If the beginning of the text is the bot's name, then start insert sequence
+						// Database Command detection
+						// If the beginning of the text is the bot's name, then send to command sequence
 						if (text.substr(0,config.botName.length) == config.botName) {
-							dbInsert(text);
+							dbCommand(text, printToChannel);
 						
 						} else {
 							// Standard trigger lookup
 							dbFind(text, printToChannel);						
 						}
-
-
 				}
 				catch(err) {
 					console.log("Fail in connect: " + err.message)
@@ -181,7 +206,7 @@ db.on("connect", function(err) {
 				}
 			}
 
-				/*
+				/* TODO I've kept this commented just to see what all the message params are
 			}
 			switch(text) {
 				case 'message arguments':
