@@ -110,36 +110,77 @@ db.on("connect", function(err) {
 	* Description:   This function prepares the INSERT argument to be passed to dbQuery
 	*  ----------------------------------------------------------------------------------------
 	*/
-	function dbCommand(text,callback) {
-			//var validUrl = /^(http|https):\/\/[^ "]+$/;
-			var reply = /[^]( <reply> )[^]/i;
-			var action = /[^]( <action> )[^]/i;
-			var are = /[^]( are )[^]/i;
-			var is = /[^]( is )[^]/i;
-			var loves = /[^]( loves )[^]/i;
-			var strangles = /[^]( strangles )[^]/i;
-			var returned;
-			if (reply.test(text)) {
-				returned = "Reply pattern found"
-			} else if (action.test(text)) {
-				returned = "Action pattern found"
-			} else if (are.test(text)) {
-				returned = "Are pattern found"
-			} else if (is.test(text)) {
-				returned = "Is pattern found"
-			} else if (loves.test(text)) {
-				returned = "Love pattern found"
-			} else if (strangles.test(text)) {
-				returned = "Strangles pattern found"
-			} else {
-				returned = "Command not understood";
+	function dbCommand(text, callback) {
+			var returned = findPattern(text);
+			switch(returned) {
+				case 'reply':
+					// Basic bukket key phrase response insertion
+
+					break;
+				case 'action':
+					// Keyword triggers bukket to do a /me + response
+
+					break;
+				case 'are':
+					// Assign synonyms to keywords
+
+					break;
+				case 'is':
+					// Assign verbs to keywords
+
+					break;
+				case 'loves':
+					// Describe items of affectation for keywords
+
+					break;
+				case 'strangles':
+					// List items of annoyance for keywords
+
+					break;
+				default:
+					// Basic bukket key phrase response insertion
+
+					break;
+
 			}
-
-
+			
 		callback(returned); // TODO Temp filler until function completed
 	}
 
 
+	/* ----------------------------------------------------------------------------------------
+	* Function Name: findPattern
+	* Parameters:    input: The text to be examined for regex matches
+	* Returns:       returned: The case that the input matches, as a string
+	* Description:   This function goes through regexes to find which command to apply to input
+	*  ----------------------------------------------------------------------------------------
+	*/
+	function findPattern(input) {
+		// TODO I want to come up with some clever list or array method of going through the regexes, eventually
+		var reply = /[^]( <reply> )[^]/i;
+		var action = /[^]( <action> )[^]/i;
+		var are = /[^]( are )[^]/i;
+		var is = /[^]( is )[^]/i;
+		var loves = /[^]( loves )[^]/i;
+		var strangles = /[^]( strangles )[^]/i;
+		
+		if (reply.test(input)) {
+			returned = "reply"
+		} else if (action.test(input)) {
+			returned = "action"
+		} else if (are.test(input)) {
+			returned = "are"
+		} else if (is.test(input)) {
+			returned = "is"
+		} else if (loves.test(input)) {
+			returned = "loves"
+		} else if (strangles.test(input)) {
+			returned = "strangles"
+		} else {
+			returned = "none";
+		}
+		return returned;
+	}
 
 
 	/* ----------------------------------------------------------------------------------------
