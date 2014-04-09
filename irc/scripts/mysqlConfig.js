@@ -6,11 +6,9 @@
 * description: Mysql Configuration script for nodebukket
 */
 
-// Configuration Object
-var config = {
-    host : "localhost",
-    user : "user",
-    password : "password"
-};
+// Configuration Variable
+
+// example = "mysql://root:password@localhost/maindb"
+var config = "DBType://user:pw@host/database";
 
 exports.config = config;
