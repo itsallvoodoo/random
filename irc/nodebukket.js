@@ -4,7 +4,7 @@
 * contributors: None
 * created:  140327
 *
-* description: This is the glory and wonder that is node bukket
+* description: This is the glory and wonder that is node bot
 */
 
 /* ----------------------------------------------------------------------------------------
@@ -107,42 +107,52 @@ db.on("connect", function(err) {
 	* Parameters:    text: String to be analyzed to determine what command is being issued
 	* Parameters:    callback, where to return the Command results
 	* Returns:       NA
-	* Description:   This function prepares the INSERT argument to be passed to dbQuery
+	* Description:   This function issues various commands to the bot
 	*  ----------------------------------------------------------------------------------------
 	*/
 	function dbCommand(text, callback) {
-			var returned = findPattern(text);
-			switch(returned) {
-				case 'reply':
-					// Basic bukket key phrase response insertion
+		var returned = findPattern(text);
+		printToChannel("Looking at: " + text);
+		var newRecord = {};
+		switch(returned) {
+			case 'reply':
+				// Basic bot key phrase response insertion
+				result = text.split(" <reply> ");
+				newRecord.fact = result[0];
+				newRecord.tidbit = result[1];
+				newRecord.verb = "<reply>";
+				newRecord.RE = 0;
+				newRecord.protected = 0;
+				Bucket_Facts.create(newRecord, function(err, results) {
+					if (err) throw err;
+				});
+				break;
+			case 'action':
+				// Keyword triggers bot to do a /me + response
 
-					break;
-				case 'action':
-					// Keyword triggers bukket to do a /me + response
+				break;
+			case 'are':
+				// Assign synonyms to keywords
 
-					break;
-				case 'are':
-					// Assign synonyms to keywords
+				break;
+			case 'is':
+				// Assign verbs to keywords
 
-					break;
-				case 'is':
-					// Assign verbs to keywords
+				break;
+			case 'loves':
+				// Describe items of affectation for keywords
 
-					break;
-				case 'loves':
-					// Describe items of affectation for keywords
+				break;
+			case 'strangles':
+				// List items of annoyance for keywords
 
-					break;
-				case 'strangles':
-					// List items of annoyance for keywords
+				break;
+			default:
+				// Basic bot key phrase response insertion
 
-					break;
-				default:
-					// Basic bukket key phrase response insertion
+				break;
 
-					break;
-
-			}
+		}
 			
 		callback(returned); // TODO Temp filler until function completed
 	}
@@ -157,6 +167,12 @@ db.on("connect", function(err) {
 	*/
 	function findPattern(input) {
 		// TODO I want to come up with some clever list or array method of going through the regexes, eventually
+
+		// TODO need to add:
+		// what was that
+		// forget that
+		// forget #xxx
+		
 		var reply = /[^]( <reply> )[^]/i;
 		var action = /[^]( <action> )[^]/i;
 		var are = /[^]( are )[^]/i;
@@ -233,8 +249,8 @@ db.on("connect", function(err) {
 				try {
 						// Database Command detection
 						// If the beginning of the text is the bot's name, then send to command sequence
-						if (text.substr(0,config.botName.length) == config.botName) {
-							dbCommand(text, printToChannel);
+						if (text.substr(0,config.botName.length + 2) == (config.botName + ", ")) {
+							dbCommand(text.substr(config.botName.length+2), printToChannel);
 						
 						} else {
 							// Standard trigger lookup
