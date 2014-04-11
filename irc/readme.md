@@ -29,18 +29,18 @@ The following installation instructions are assuming you are using an ubuntu ser
 
 2. Install javascript dependencies.
     First, install node. Detailed instructions can be found [here](http://howtonode.org/how-to-install-nodejs).
-    `$ sudo apt-get install g++ curl libssl-dev apache2-utils`
-    `$ sudo apt-get install git-core`
-    `$ git clone git://github.com/ry/node.git`
-    `$ cd node`
-    `$ ./configure`
-    `$ make`
-    `$ sudo make install`
+    `$ sudo apt-get install g++ curl libssl-dev apache2-utils`  
+    `$ sudo apt-get install git-core`  
+    `$ git clone git://github.com/ry/node.git`  
+    `$ cd node`  
+    `$ ./configure`  
+    `$ make`  
+    `$ sudo make install`  
 
     Second, install the modules needed by node. Navigate to the cloned repository and enter the following.
-    `$ npm install irc`
-    `$ npm install mysql`
-    `$ npm install orm`
+    `$ npm install irc`  
+    `$ npm install mysql`  
+    `$ npm install orm`  
     
 
 2. Set up a MySQL database. Other databases have not been tested, attempt at your own risk.
@@ -49,9 +49,9 @@ The following installation instructions are assuming you are using an ubuntu ser
 
 3. Create the tables in nodebukket.sql. You may need the arguments `--user=root --password` in order for it
     to work.
-    `$ mysqladmin create nodebukket`
-    `$ mysql -D nodebukket < nodebukket.sql`
-    `$ mysql -D nodebukket < nodebukket.sql`
+    `$ mysqladmin create nodebukket`  
+    `$ mysql -D nodebukket < nodebukket.sql`  
+    `$ mysql -D nodebukket < nodebukket.sql`  
 
 4. Create a user for nodebukket, and grant all permissions on the nodebukket database.
     `$ echo 'grant all on nodebukket.* to nodebukket identified by "password"' | mysql`
