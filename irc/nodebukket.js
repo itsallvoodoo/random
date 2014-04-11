@@ -103,6 +103,25 @@ db.on("connect", function(err) {
 
 
 	/* ----------------------------------------------------------------------------------------
+	* Function Name: dbInsert
+	* Parameters:    fact: The trigger to be inserted
+	* Parameters: 	 tidbit: The response to be inserted
+	* Parameters: 	 verb: The action type to be inserted
+	* Parameters: 	 RE: Dunno what this does, keeping it for legacy
+	* Parameters: 	 protected: Is this erase safe
+	* Parameters:    callback, where to return the Insert results
+	* Returns:       NA
+	* Description:   This function issues various commands to the bot
+	*  ----------------------------------------------------------------------------------------
+	*/
+	function dbInsert(fact, tidbit, verb, RE, protected, callback) {
+		
+
+	}
+
+
+
+	/* ----------------------------------------------------------------------------------------
 	* Function Name: dbCommand
 	* Parameters:    text: String to be analyzed to determine what command is being issued
 	* Parameters:    callback, where to return the Command results
