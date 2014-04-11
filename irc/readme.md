@@ -51,7 +51,7 @@ The following installation instructions are assuming you are using an ubuntu ser
     to work.
     `$ mysqladmin create nodebukket`  
     `$ mysql -D nodebukket < nodebukket.sql`  
-    `$ mysql -D nodebukket < nodebukket.sql`  
+    `$ mysql -D nodebukket < sample.sql`  
 
 4. Create a user for nodebukket, and grant all permissions on the nodebukket database.
     `$ echo 'grant all on nodebukket.* to nodebukket identified by "password"' | mysql`
